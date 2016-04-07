@@ -5,8 +5,8 @@ var result = require('./result');
 
 var SearchSchema = new Schema({
   category: String,
-  searchTimeStamp: true, //createdAt
-  result: [Result.schema]
+  searchTimeStamp: String, //type true -- createdAt
+  result: String
 });
 
 var Search = mongoose.model('Search', SearchSchema);
