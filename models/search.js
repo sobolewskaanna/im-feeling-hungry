@@ -1,12 +1,20 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var result = require('./result');
+var Result = require('./result');
 
 var SearchSchema = new Schema({
-  category: String,
-  searchTimeStamp: String, //type true -- createdAt
-  result: String
+  query: String,
+  location: {
+              formattedAddress: String,
+              lat: Number,
+              lng: Number
+            },
+   time: {
+            type : Date,
+            default: Date.now
+          },
+   result: [Result.schema]
 });
 
 var Search = mongoose.model('Search', SearchSchema);

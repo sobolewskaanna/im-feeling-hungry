@@ -23,7 +23,25 @@ app.get('/', function homepage (req, res) {
 
 
 ////JSON API ENDPOINTS
+app.post('/api/searches', function (req, res) {
+  database.Search.create(req.body, function (err, search) {
+    if (err) {
+      console.log('error from post', err);
+    } else {
+      res.json(search);
+    }
+  });
+});
 
+app.get('/api/searches', function(req, res) {
+  database.Search.find({}, function (err, searches) {
+    if (err) {
+      console.log('couldnt find any searches', err);
+    } else {
+      res.json(searches);
+    }
+  });
+});
 
 ////SERVER
 //listen on port 3000

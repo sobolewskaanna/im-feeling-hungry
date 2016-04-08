@@ -1,6 +1,9 @@
-var database = require('.models');
+//populates empty database
+//node seed.js
 
-var searches = [
+var database = require('./models');
+
+var seachList = [
   {
     category: 'Thai',
     searchTimeStamp: '030405',
@@ -24,7 +27,7 @@ database.Search.remove({}, function(err, albums) {
     if (err) {
       return console.log('ERROR', err);
     } else {
-      console.log('all searched', searches);
+      console.log('all searches', searches);
     }
     process.exit();
   });
