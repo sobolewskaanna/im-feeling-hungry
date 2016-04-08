@@ -1,3 +1,47 @@
+////API
+{
+  meta: {
+    code: 200
+    requestId: "57070393498ebc6867ed9c9c"
+  }
+  notifications: [
+    {
+      type: "notificationTray"
+      item: {
+        unreadCount: 0
+      }
+    }
+  ]
+  response: {
+    venue: {
+      id: "40a55d80f964a52020f31ee3"
+      name: "Clinton St. Baking Co. & Restaurant"
+      contact: {
+        phone: "6466026263"
+        formattedPhone: "(646) 602-6263"
+      }
+      location: {
+        address: "4 Clinton St"
+        crossStreet: "at E Houston St"
+        lat: 40.72107924768216
+        lng: -73.98394256830215
+        postalCode: "10002"
+        mayNotNeedAddress: false
+        cc: "US"
+        city: "New York"
+        state: "NY"
+        country: "United States"
+        formattedAddress: [
+          "4 Clinton St (at E Houston St)"
+          "New York, NY 10002"
+        ]
+      }
+    }
+  }
+}
+
+
+
 // require express
 var express = require('express');
 
