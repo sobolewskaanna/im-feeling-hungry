@@ -55,17 +55,24 @@ app.get('/api/searches/:id/results', function (req, res) {
     var foursquareClientId = process.env.FOURSQUARE_CLIENT_ID;
     var foursquareClientSecret = process.env.FOURSQUARE_CLIENT_SECRET;
     var requestUrl = 'https://api.foursquare.com/v2/venues/search?ll=37.775,-122.419&query=' + searchQuery +'&client_id=' + foursquareClientId + '&client_secret=' + foursquareClientSecret + '&v=20140806';
+
     if (err) {
       res.send(err);
     } else {
-      request({
-        method: 'GET',
-        url: requestUrl,
+      request.get(requestUrl, function (error, response, body) {
+        if (error) {
+          console.log('error receiving data from fourquare API');
+        } else {
+          console.log('received this from fourquare API');
+          var foursquareApiOutput = JSON.parse(body);
+          var venueName = foursquareApiOutput.response.venues[0].name;
+          console.log(venueName);
+          res.json(venueName);
+        }
       });
-    res.json(requestUrl);
     }
   });
-
+});
       // );
       //go to foursquare api look for
       // var venueName = foursquareApiOutput[0].response.venue.name;
@@ -79,7 +86,6 @@ app.get('/api/searches/:id/results', function (req, res) {
   //     // res.json(resultObject);
   //   }
   // });
-});
 
 
 ////SERVER

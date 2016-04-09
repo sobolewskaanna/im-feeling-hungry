@@ -19,7 +19,7 @@ $(document).ready(function(){
 function handleSucces (json) {
   console.log('hello');
   console.log(json);
-  $('.results').append(json.venueName);
+  $('.results').append(json);
 }
 
 function handleError (err) {
