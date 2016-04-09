@@ -140,10 +140,12 @@ var foursquareApiOutput = [
 
 
 /////HTML ENDPOINTS
+//localhost3000/
 app.get('/', function homepage (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
-app.get('/search_result', function searchResult (req, res) {
+// goes to localhost3000/searches/somekindofId
+app.get('/api/searches/:id', function searchResult (req, res) {
   res.sendFile(__dirname + '/views/search_result.html');
 });
 
@@ -168,6 +170,16 @@ app.post('/api/searches', function (req, res) {
   });
 });
 
+
+app.get('/api/searches/:id/results', function (req, res) {
+  database.Search.findById(req.params.id, function (err, search) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(search);
+    }
+  });
+});
 
 
 ////SERVER
