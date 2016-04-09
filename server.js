@@ -1,6 +1,9 @@
 // require express
 var express = require('express');
 
+// require and load dotenv
+var dotenv = require('dotenv').load();
+
 //generate a new express app and call it 'app'
 var app = express();
 var mongoose = require('mongoose');
