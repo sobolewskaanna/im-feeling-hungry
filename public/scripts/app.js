@@ -16,7 +16,7 @@ $(document).ready(function(){
 
 function handleSucces (json) {
   var id = json._id;
-  window.location.href = '/api/searches/' + id;
+  window.location.href = '/searches/' + id;
 }
 
 function handleError (err) {

@@ -145,7 +145,7 @@ app.get('/', function homepage (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 // goes to localhost3000/searches/somekindofId
-app.get('/api/searches/:id', function searchResult (req, res) {
+app.get('/searches/:id', function searchResult (req, res) {
   res.sendFile(__dirname + '/views/search_result.html');
 });
 
@@ -153,10 +153,6 @@ app.get('/api/searches/:id', function searchResult (req, res) {
 ////JSON API ENDPOINTS
 
 app.post('/api/searches', function (req, res) {
-  // var venueName = foursquareApiOutput[0].response.venue.name;
-  // var venueLocation = foursquareApiOutput[0].response.venue.location.formattedAddress;
-  // var rating = foursquareApiOutput[0].response.venue.rating;
-
   var newSearch = database.Search ({
     query: req.body.query,
     city: req.body.city
@@ -176,7 +172,16 @@ app.get('/api/searches/:id/results', function (req, res) {
     if (err) {
       res.send(err);
     } else {
-      res.json(search);
+      //go to foursquare api look for
+      var venueName = foursquareApiOutput[0].response.venue.name;
+      var venueLocation = foursquareApiOutput[0].response.venue.location.formattedAddress;
+      var rating = foursquareApiOutput[0].response.venue.rating;
+      var resultObject = {
+        venueName: venueName,
+        venueLocation: venueLocation,
+        rating: rating
+      };
+      res.json(resultObject);
     }
   });
 });
