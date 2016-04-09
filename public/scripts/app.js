@@ -2,10 +2,12 @@ console.log('sanity check');
 
 $(document).ready(function(){
 
-  $('#searchButton').on('click', function(event) {
+  $('#newSearchForm').on('submit', function(event) {
+    event.preventDefault();
     $.ajax({
-      method: 'GET',
+      method: 'POST',
       url: '/api/searches',
+      data: $(this).serialize(),
       success: handleSucces,
       error: handleError
     });
@@ -13,7 +15,8 @@ $(document).ready(function(){
 });
 
 function handleSucces (json) {
-  console.log('these are my results', json);
+  var id = json._id;
+  window.location.href = '/searches/' + id;
 }
 
 function handleError (err) {

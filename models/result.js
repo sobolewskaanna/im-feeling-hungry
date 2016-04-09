@@ -2,8 +2,9 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var ResultSchema = new Schema({
-  restaurantName: String,
-  restaurntLocation: String
+  venueName: String,
+  venueLocation: String,
+  rating: Number
 });
 
 var Result = mongoose.model('Result', ResultSchema);
