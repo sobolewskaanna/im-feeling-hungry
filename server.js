@@ -50,40 +50,48 @@ app.post('/api/searches', function (req, res) {
 
 
 app.get('/api/searches/:id/results', function (req, res) {
-  database.Search.findById(req.params.id, function (err, search) {
-    var searchQuery = search.query;
+  database.Search.findById(req.params.id, function (err, foundSearch) {
+    var searchQuery = foundSearch.query;
+    var searchCity = foundSearch.city;
     var foursquareClientId = process.env.FOURSQUARE_CLIENT_ID;
     var foursquareClientSecret = process.env.FOURSQUARE_CLIENT_SECRET;
-    var requestUrl = 'https://api.foursquare.com/v2/venues/search?ll=37.775,-122.419&query=' + searchQuery +'&client_id=' + foursquareClientId + '&client_secret=' + foursquareClientSecret + '&v=20140806&m=swarm';
+    var requestUrl = 'https://api.foursquare.com/v2/venues/search?near=' + searchCity + '&query=' + searchQuery +'&client_id=' + foursquareClientId + '&client_secret=' + foursquareClientSecret + '&v=20140806&';
 
     if (err) {
       res.send(err);
     } else {
       request.get(requestUrl, function (error, response, body) {
         if (error) {
-          console.log('error receiving data from fourquare API', error);
+          res.send('error receiving data from fourquare API', error);
         } else {
-          console.log('received this from fourquare API');
           var foursquareApiOutput = JSON.parse(body);
-          var randomSelection = Math.floor((Math.random()*10) + 1);
-          var restaurantId = foursquareApiOutput.response.venues[randomSelection].id;
-          var venueName = foursquareApiOutput.response.venues[randomSelection].name;
-          var venueLocation = foursquareApiOutput.response.venues[randomSelection].location.formattedAddress;
-          // var rating = foursquareApiOutput.response.venues[randomSelection].rating;
-
-          var newResult = database.Result ({
-            venueName: venueName,
-            venueLocation: venueLocation
-          });
-          res.json(venueName + venueLocation);
-        }
-      });
-    }
+          var results = foursquareApiOutput.response.venues;
+          if (results === undefined) {
+            res.send('there were no venues');
+          } else {
+              results.forEach(function (result) {
+                var newResult = new database.Result({
+                  venueName: result.name,
+                  venueLocation: result.location.formattedAddress,
+                });
+                foundSearch.result.push(newResult);
+                foundSearch.save(function (err, newResult) {
+                  if (err) {
+                    res.send('error saving result', err);
+                  }
+                });
+              });
+              res.json(foundSearch);
+            }
+          }
+        });
+      }
   });
 });
 
+
 app.get('/api/searches', function (req, res) {
-  database.Search.find({}, function (err, searches) {
+  database.Search.find({}).sort('-time').limit(5).exec(function (err, searches) {
     if (err) {
       res.send(err);
     } else {

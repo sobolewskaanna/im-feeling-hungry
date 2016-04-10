@@ -7,7 +7,12 @@ $(document).ready(function(){
     $.ajax({
       method: 'GET',
       url: '/api/searches',
-      success: findSearches,
+      success: function findSearches (searches) {
+        searches.forEach(function (search) {
+          $('.recent-searches').append(search.query);
+        });
+        // setTimeout(populateWithRecentSearches(), 5000);
+      },
       error: handleError
     });
   }
@@ -23,11 +28,6 @@ $(document).ready(function(){
     });
   });
 });
-
-function findSearches (data) {
-    $('.recent-searches').append(data);
-    // setTimeout(populateWithRecentSearches, 5000)
-}
 
 function handleSucces (json) {
   var id = json._id;

@@ -3,8 +3,7 @@ var Schema = mongoose.Schema;
 
 var ResultSchema = new Schema({
   venueName: String,
-  venueLocation: String,
-  rating: Number
+  venueLocation: String
 });
 
 var Result = mongoose.model('Result', ResultSchema);
