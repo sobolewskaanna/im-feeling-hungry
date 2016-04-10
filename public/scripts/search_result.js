@@ -31,11 +31,16 @@ $(document).ready(function(){
 });
 
   function renderResult (results) {
-    var resultsAmount = results.result.length;
-    var randomNumber = Math.floor((Math.random() * resultsAmount) + 0);
-    var venueName = results.result[randomNumber].venueName;
-    var venueLocation = results.result[randomNumber].venueLocation;
-    $('.results').html(venueName);
+    if (results.result === undefined) {
+      alert('Location does not exist.');
+      window.location.href = '/';
+    } else {
+      var resultsAmount = results.result.length;
+      var randomNumber = Math.floor((Math.random() * resultsAmount) + 0);
+      var venueName = results.result[randomNumber].venueName;
+      var venueLocation = results.result[randomNumber].venueLocation;
+      $('.results').html(venueName);
+    }
   }
 
 function handleError (err) {
