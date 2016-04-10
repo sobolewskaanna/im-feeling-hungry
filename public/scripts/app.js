@@ -1,6 +1,18 @@
 console.log('sanity check');
 
 $(document).ready(function(){
+  populateWithRecentSearches();
+  function populateWithRecentSearches () {
+    $.ajax({
+      method: 'GET',
+      url: '/api/searches',
+      success: function (data) {
+        $('.recent-searches').append(data);
+        // setTimeout(populateWithRecentSearches, 5000)
+      },
+      error: handleError
+    });
+  }
 
   $('#newSearchForm').on('submit', function(event) {
     event.preventDefault();

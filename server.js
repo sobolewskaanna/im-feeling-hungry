@@ -54,39 +54,37 @@ app.get('/api/searches/:id/results', function (req, res) {
     var searchQuery = search.query;
     var foursquareClientId = process.env.FOURSQUARE_CLIENT_ID;
     var foursquareClientSecret = process.env.FOURSQUARE_CLIENT_SECRET;
-    var requestUrl = 'https://api.foursquare.com/v2/venues/search?ll=37.775,-122.419&query=' + searchQuery +'&client_id=' + foursquareClientId + '&client_secret=' + foursquareClientSecret + '&v=20140806';
+    var requestUrl = 'https://api.foursquare.com/v2/venues/search?ll=37.775,-122.419&query=' + searchQuery +'&client_id=' + foursquareClientId + '&client_secret=' + foursquareClientSecret + '&v=20140806&m=swarm';
 
     if (err) {
       res.send(err);
     } else {
       request.get(requestUrl, function (error, response, body) {
         if (error) {
-          console.log('error receiving data from fourquare API');
+          console.log('error receiving data from fourquare API', error);
         } else {
           console.log('received this from fourquare API');
           var foursquareApiOutput = JSON.parse(body);
-          var venueName = foursquareApiOutput.response.venues[0].name;
-          console.log(venueName);
-          res.json(venueName);
+          var randomSelection = Math.floor((Math.random()*10) + 1);
+          var restaurantId = foursquareApiOutput.response.venues[randomSelection].id;
+          var venueName = foursquareApiOutput.response.venues[randomSelection].name;
+          var venueLocation = foursquareApiOutput.response.venues[randomSelection].location.formattedAddress;
+          // var rating = foursquareApiOutput.response.venues[randomSelection].rating;
+
+          var newResult = database.Result ({
+            venueName: venueName,
+            venueLocation: venueLocation
+          });
+          res.json(venueName + venueLocation);
         }
       });
     }
   });
 });
-      // );
-      //go to foursquare api look for
-      // var venueName = foursquareApiOutput[0].response.venue.name;
-      // var venueLocation = foursquareApiOutput[0].response.venue.location.formattedAddress;
-      // var rating = foursquareApiOutput[0].response.venue.rating;
-      // var resultObject = {
-      //   venueName: venueName,
-      //   venueLocation: venueLocation,
-      //   rating: rating
-      // };
-  //     // res.json(resultObject);
-  //   }
-  // });
 
+app.get('/api/searches', function (req, res) {
+
+});
 
 ////SERVER
 //listen on port 3000
