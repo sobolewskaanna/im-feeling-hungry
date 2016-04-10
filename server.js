@@ -83,7 +83,13 @@ app.get('/api/searches/:id/results', function (req, res) {
 });
 
 app.get('/api/searches', function (req, res) {
-
+  database.Search.find({}, function (err, searches) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(searches);
+    }
+  });
 });
 
 ////SERVER

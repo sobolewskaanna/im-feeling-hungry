@@ -1,15 +1,13 @@
 console.log('sanity check');
 
 $(document).ready(function(){
+
   populateWithRecentSearches();
   function populateWithRecentSearches () {
     $.ajax({
       method: 'GET',
       url: '/api/searches',
-      success: function (data) {
-        $('.recent-searches').append(data);
-        // setTimeout(populateWithRecentSearches, 5000)
-      },
+      success: findSearches,
       error: handleError
     });
   }
@@ -25,6 +23,11 @@ $(document).ready(function(){
     });
   });
 });
+
+function findSearches (data) {
+    $('.recent-searches').append(data);
+    // setTimeout(populateWithRecentSearches, 5000)
+}
 
 function handleSucces (json) {
   var id = json._id;
