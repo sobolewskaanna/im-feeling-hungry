@@ -24,6 +24,10 @@ $(document).ready(function(){
     renderResult(outsideResults);
   }
 
+  $('#backButton').on('click', function (event) {
+    window.location.href = '/';
+  });
+
 });
 
   function renderResult (results) {
