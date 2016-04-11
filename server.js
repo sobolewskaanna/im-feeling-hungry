@@ -129,6 +129,21 @@ app.get('/api/reviews', function index(req, res) {
   res.json({ reviews: reviews });
 });
 
+//create a new review
+app.post('/api/reviews', function (req, res) {
+  var newReview = database.Review ({
+    title: req.body.title,
+    description: req.body.description
+  });
+  newReview.save(function(err, review){
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(review);
+    }
+  });
+});
+
 
 
 ////SERVER
