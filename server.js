@@ -30,6 +30,10 @@ app.get('/', function homepage (req, res) {
 app.get('/searches/:id', function searchResult (req, res) {
   res.sendFile(__dirname + '/views/search_result.html');
 });
+// goes to localhost3000/searches/somekindofId
+app.get('/discussions', function searchResult (req, res) {
+  res.sendFile(__dirname + '/views/discussions.html');
+});
 
 
 ////JSON API ENDPOINTS

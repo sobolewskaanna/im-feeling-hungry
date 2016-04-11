@@ -30,6 +30,10 @@ $(document).ready(function(){
       error: handleError
     });
   });
+
+  $('#menu').on('click', function (event) {
+    window.location.href = '/discussions';
+  });
 });
 
 function handleSucces (json) {
