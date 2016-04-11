@@ -3,8 +3,8 @@ mongoose.connect('mongodb://localhost/project-01');
 
 var Search = require('./search');
 var Result = require('./result');
-var Discussion = require('./discussion');
+var Review = require('./review');
 
 module.exports.Search = Search;
 module.exports.Result = Result;
-module.exports.Discussion = Discussion;
+module.exports.Review = Review;

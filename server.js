@@ -31,8 +31,8 @@ app.get('/searches/:id', function searchResult (req, res) {
   res.sendFile(__dirname + '/views/search_result.html');
 });
 // goes to localhost3000/searches/somekindofId
-app.get('/discussions', function searchResult (req, res) {
-  res.sendFile(__dirname + '/views/discussions.html');
+app.get('/reviews', function searchResult (req, res) {
+  res.sendFile(__dirname + '/views/reviews.html');
 });
 
 
@@ -107,6 +107,8 @@ app.get('/api/searches', function (req, res) {
     }
   });
 });
+
+
 
 ////SERVER
 //listen on port 3000
