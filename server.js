@@ -124,9 +124,20 @@ app.get('/api/searches', function (req, res) {
 });
 
 // get all reviews
-app.get('/api/reviews', function index(req, res) {
+app.get('/api', function index(req, res) {
   // send all todos as JSON response
   res.json({ reviews: reviews });
+});
+
+// get all reviews
+app.get('/api/reviews', function index(req, res) {
+  database.Review.find({}, function (err, reviews) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(reviews);
+    }
+  });
 });
 
 //create a new review

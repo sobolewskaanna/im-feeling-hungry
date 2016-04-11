@@ -11,9 +11,19 @@ $(document).ready(function(){
   //GET all reviews on page load
   $.ajax({
     method: 'GET',
-    url: 'api/reviews',
+    url: 'api',
     success: function onIndexSuccess(data) {
       allReviews = data.reviews;
+      renderReview();
+    }
+  });
+
+  $.ajax({
+    method: 'GET',
+    url: 'api/reviews',
+    success: function onIndexSuccess(reviews) {
+      console.log(reviews);
+      allReviews = reviews;
       renderReview();
     }
   });
@@ -32,6 +42,7 @@ $(document).ready(function(){
       url: 'api/reviews',
       data: $(this).serialize(),
       success: function onCreateSuccess (response) {
+        console.log(response);
         allReviews.push(response);
         renderReview();
       }
