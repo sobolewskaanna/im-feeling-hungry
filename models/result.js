@@ -7,7 +7,8 @@ var ResultSchema = new Schema({
     location: String,
     lat: Number,
     lng: Number
-  }
+  },
+  venueWebsite: String
 });
 
 var Result = mongoose.model('Result', ResultSchema);
