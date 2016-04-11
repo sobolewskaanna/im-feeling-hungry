@@ -1,5 +1,7 @@
 console.log('sanity check');
 
+  var map;
+
 $(document).ready(function(){
 
   var source = $('#result-template').html();
@@ -10,7 +12,7 @@ $(document).ready(function(){
   var url = '/api/searches/' + id + '/results';
   var outsideResults;
 
-  initMap();
+  createMap();
 
   $.ajax({
     method: 'GET',
@@ -40,8 +42,13 @@ $(document).ready(function(){
       var resultsAmount = results.result.length;
       var randomNumber = Math.floor((Math.random() * resultsAmount) + 0);
       var result = results.result[randomNumber];
+      var lat = results.result[randomNumber].venueLocation.lat;
+      var lng = results.result[randomNumber].venueLocation.lng;
+      new google.maps.Marker({
+        position: new google.maps.LatLng(lat, lng),
+        map: map,
+      });
       var resultsHtml = resultTemplate(result);
-      console.log(resultsHtml);
       $('#results').html(resultsHtml);
     }
   }
@@ -50,12 +57,11 @@ $(document).ready(function(){
     console.log ('there is an error', err);
   }
 
-});
-
-function initMap() {
-  var myLatLng = {lat: 37.78, lng: -122.44};
-  var map = new google.maps.Map(document.getElementById('map'), {
-    center: myLatLng,
-    zoom: 11
+  function createMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: { lat: 37.78, lng: -122.44},
+    zoom: 12
   });
 }
+
+});
