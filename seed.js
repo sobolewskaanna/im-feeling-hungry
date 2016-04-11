@@ -3,27 +3,27 @@
 
 var database = require('./models');
 
-var discussionList = [
+var reviewList = [
   {
-    topic: 'Thai',
+    title: 'Thai',
     description: 'I love thai food!!! It is my favorite!'
   },
   {
-    topic: 'I love this app',
+    title: 'I love this app',
     description: 'I didnt know what to eat today! This app helped me figure it out!'
   },
   {
-    topic: 'Best app ever',
+    title: 'Best app ever',
     description: 'Love it'
   }
 ];
 
-database.Search.remove({}, function(err, albums) {
-  database.Search.create(discussionList, function(err, discussions) {
+database.Review.remove({}, function(err, reviews) {
+  database.Review.create(reviewList, function(err, reviews) {
     if (err) {
       return console.log('ERROR', err);
     } else {
-      console.log('all searches', discussions);
+      console.log('all searches', reviews);
     }
     process.exit();
   });

@@ -17,8 +17,23 @@ app.use(express.static('public'));
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-/////DATABASE
+/////DATABASE SEEDS
 var database = require('./models');
+
+var reviews = [
+  {
+    title: 'Thai',
+    description: 'I love thai food!!! It is my favorite!'
+  },
+  {
+    title: 'I love this app',
+    description: 'I didnt know what to eat today! This app helped me figure it out!'
+  },
+  {
+    title: 'Best app ever',
+    description: 'Love it'
+  }
+];
 
 
 /////HTML ENDPOINTS
@@ -106,6 +121,12 @@ app.get('/api/searches', function (req, res) {
       res.send(searches);
     }
   });
+});
+
+// get all reviews
+app.get('/api/reviews', function index(req, res) {
+  // send all todos as JSON response
+  res.json({ reviews: reviews });
 });
 
 

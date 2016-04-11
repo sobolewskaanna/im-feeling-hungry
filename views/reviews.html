@@ -16,23 +16,54 @@
 
 
     <!-- APPLICATION SCRIPTS -->
-    <script src="/scripts/search_result.js"></script>
+    <script src="/scripts/reviews.js"></script>
 
   </head>
 
   <body>
-    <p>Tell us about your food experiences!</p>
-    <form class="form-inline" id="create-discussion">
-          <div class="form-group">
-            <input type="text" name="title" class="form-control" placeholder="Title" autofocus>
-          </div>
-          <div class="form-group">
-            <input type="text" name="description" class="form-control" placeholder="Description">
-          </div>
-          <div class="form-group">
-            <input type="submit" class="btn btn-default" value="Add Discussion">
-          </div>
-        </form>
-        <br>
+    <p>Tell us what you think about the app!</p>
+    <form class="form-inline" id="create-review">
+      <div class="form-group">
+        <input type="text" name="title" class="form-control" placeholder="Title" autofocus>
+      </div>
+      <div class="form-group">
+        <input type="text" name="description" class="form-control" placeholder="Description">
+      </div>
+      <div class="form-group">
+        <input type="submit" class="btn btn-default" value="Add Review">
+      </div>
+    </form>
+
+    <!-- list of todos -->
+    <ul class="list-group" id="reviews-list">
+
+      <!-- handlebars template -->
+      <script id="reviews-template" type="text/x-handlebars-template">
+        {{#each reviews}}
+        <li class="list-group-item review" data-id="{{_id}}">
+
+          <!-- review title -->
+          <span class="label label-default">{{title}}</span>
+
+          <!-- review description -->
+          {{description}}
+
+          <!-- <div class="pull-right"> -->
+            <!-- pencil icon to toggle update form -->
+            <!-- <a href="javascript:void(0)" data-toggle="collapse" data-target="#update-{{_id}}"> -->
+              <!-- <span class="glyphicon glyphicon-pencil"></span> -->
+            <!-- </a> -->
+
+            <!-- trash can icon to delete review -->
+            <!-- <a href="javascript:void(0)" class="delete-review"> -->
+              <!-- <span class="glyphicon glyphicon-trash"></span> -->
+            <!-- </a> -->
+          <!-- </div> -->
+
+        </li>
+        {{/each}}
+      </script>
+    </ul>
+
   </body>
 </html>
