@@ -3,31 +3,27 @@
 
 var database = require('./models');
 
-var seachList = [
+var discussionList = [
   {
-    category: 'Thai',
-    searchTimeStamp: '030405',
-    result: 'Good Thai'
+    topic: 'Thai',
+    description: 'I love thai food!!! It is my favorite!'
   },
   {
-    category: 'Tacos',
-    searchTimeStamp: '030405',
-    result: 'Good Tacos'
+    topic: 'I love this app',
+    description: 'I didnt know what to eat today! This app helped me figure it out!'
   },
   {
-    category: 'Burger',
-    searchTimeStamp: '030405',
-    result: 'Good Burger'
+    topic: 'Best app ever',
+    description: 'Love it'
   }
-
 ];
 
 database.Search.remove({}, function(err, albums) {
-  database.Search.create(seachList, function(err, searches) {
+  database.Search.create(discussionList, function(err, discussions) {
     if (err) {
       return console.log('ERROR', err);
     } else {
-      console.log('all searches', searches);
+      console.log('all searches', discussions);
     }
     process.exit();
   });
