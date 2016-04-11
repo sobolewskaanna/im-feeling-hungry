@@ -22,7 +22,13 @@
   <body>
 
     <div>
-      <div class="results"></div>
+      <div id="results"></div>
+        <script id='result-template' type='text/x-handlebars-template'>
+          <h4 class='inline-header'>Restaurant:</h4>
+          <span class='venueResult'>{{venueName}}</span>
+          <h4 class='inline-header'>Location:</h4>
+          <span class='venueResult'>{{venueLocation}}</span>
+      </script>
       <button id="backButton" name="singlebutton" class="btn btn-primary">Make Another Search</button>
       <button id="notFeelingItButton" name="singlebutton" class="btn btn-primary">I'm Not Feeling It</button>
     <div>

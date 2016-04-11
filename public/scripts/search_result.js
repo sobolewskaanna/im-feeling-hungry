@@ -2,6 +2,8 @@ console.log('sanity check');
 
 $(document).ready(function(){
 
+  var source = $('#result-template').html();
+  var resultTemplate = Handlebars.compile(source);
   var windowPath = window.location.pathname;
   var windowPathSplit = windowPath.split("/");
   var id = windowPathSplit[2];
@@ -28,8 +30,6 @@ $(document).ready(function(){
     window.location.href = '/';
   });
 
-});
-
   function renderResult (results) {
     if (results.result === undefined) {
       alert('Location does not exist.');
@@ -37,12 +37,15 @@ $(document).ready(function(){
     } else {
       var resultsAmount = results.result.length;
       var randomNumber = Math.floor((Math.random() * resultsAmount) + 0);
-      var venueName = results.result[randomNumber].venueName;
-      var venueLocation = results.result[randomNumber].venueLocation;
-      $('.results').html(venueName);
+      var result = results.result[randomNumber];
+      var resultsHtml = resultTemplate(result);
+      console.log(resultsHtml);
+      $('#results').html(resultsHtml);
     }
   }
 
-function handleError (err) {
-  console.log ('there is an error', err);
-}
+  function handleError (err) {
+    console.log ('there is an error', err);
+  }
+
+});
