@@ -66,24 +66,27 @@ app.get('/api/searches/:id/results', function (req, res) {
         } else {
           var foursquareApiOutput = JSON.parse(body);
           var results = foursquareApiOutput.response.venues;
-          res.json(foursquareApiOutput);
-          // if (results === undefined) {
-          //   res.send('there were no venues');
-          // } else {
-          //     results.forEach(function (result) {
-          //       var newResult = new database.Result({
-          //         venueName: result.name,
-          //         venueLocation: result.location.formattedAddress,
-          //       });
-          //       foundSearch.result.push(newResult);
-          //       foundSearch.save(function (err, newResult) {
-          //         if (err) {
-          //           res.send('error saving result', err);
-          //         }
-          //       });
-          //     });
-          //     res.json(foundSearch);
-          //   }
+          if (results === undefined) {
+            res.send('there were no venues');
+          } else {
+              results.forEach(function (result) {
+                var newResult = new database.Result({
+                  venueName: result.name,
+                  venueLocation: {
+                    location: result.location.formattedAddress,
+                    lat: result.location.lat,
+                    lng: result.location.lng
+                  }
+                });
+                foundSearch.result.push(newResult);
+                foundSearch.save(function (err, newResult) {
+                  if (err) {
+                    res.send('error saving result', err);
+                  }
+                });
+              });
+              res.json(foundSearch);
+            }
           }
         });
       }

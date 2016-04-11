@@ -24,9 +24,8 @@ $(document).ready(function(){
   });
 
   function handleSuccess (results) {
-    // outsideResults = results;
-    // renderResult(outsideResults);
-    console.log(results);
+    outsideResults = results;
+    renderResult(outsideResults);
   }
 
   $('#backButton').on('click', function (event) {
