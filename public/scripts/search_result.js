@@ -10,6 +10,8 @@ $(document).ready(function(){
   var url = '/api/searches/' + id + '/results';
   var outsideResults;
 
+  initMap();
+
   $.ajax({
     method: 'GET',
     url: url,
@@ -49,3 +51,11 @@ $(document).ready(function(){
   }
 
 });
+
+function initMap() {
+  var myLatLng = {lat: 37.78, lng: -122.44};
+  var map = new google.maps.Map(document.getElementById('map'), {
+    center: myLatLng,
+    zoom: 11
+  });
+}
