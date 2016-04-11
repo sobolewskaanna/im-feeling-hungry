@@ -6,23 +6,19 @@ $(document).ready(function(){
   var source = $('#search-template').html();
   var searchTemplate = Handlebars.compile(source);
 
-  populateWithRecentSearches();
   function populateWithRecentSearches () {
     $.ajax({
       method: 'GET',
       url: '/api/searches',
       success: function findSearches (searches) {
         var searchesHtml = searchTemplate({searches: searches});
-        $('#recentSearches').append(searchesHtml);
-
-        // searches.forEach(function (search) {
-        //   $('.recent-searches').append(search.query);
-        // });
-        // setTimeout(populateWithRecentSearches(), 5000);
+        $('#recentSearches').html(searchesHtml);
       },
       error: handleError
     });
+    setTimeout(populateWithRecentSearches, 1000);
   }
+  populateWithRecentSearches();
 
   $('#newSearchForm').on('submit', function(event) {
     event.preventDefault();
