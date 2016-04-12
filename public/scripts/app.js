@@ -12,7 +12,7 @@ $(document).ready(function(){
       url: '/api/searches',
       success: function findSearches (searches) {
         var searchesHtml = searchTemplate({searches: searches});
-        $('#recentSearches').html(searchesHtml);
+        $('#recent-search').html(searchesHtml);
       },
       error: handleError
     });
@@ -20,7 +20,7 @@ $(document).ready(function(){
   }
   populateWithRecentSearches();
 
-  $('#newSearchForm').on('submit', function(event) {
+  $('#new-search-form').on('submit', function(event) {
     event.preventDefault();
     $.ajax({
       method: 'POST',
@@ -31,7 +31,7 @@ $(document).ready(function(){
     });
   });
 
-  $('#menu').on('click', function (event) {
+  $('#review-button').on('click', function (event) {
     window.location.href = '/reviews';
   });
 });

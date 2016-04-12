@@ -9,6 +9,7 @@
     <!-- STYLESHEETS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="/styles/styles.css">
+    <link href='https://fonts.googleapis.com/css?family=Archivo+Black' rel='stylesheet' type='text/css'>
 
     <!-- VENDOR SCRIPTS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
@@ -23,24 +24,26 @@
   <body>
     <nav class="navbar navbar-default navbar-static-top">
       <div class="container">
-        <button id="menu" type="button" class="btn btn-default">
-          <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"> Discussion Board</span>
-        </button>
+        <button id="review-button" type="button" class="btn btn-primary-outline">Leave a Review</button>
       </div>
     </nav>
     <!-- Text input-->
-    <div class="form-group">
-      <div class="col-md-4">
-        <form class="form-inline" id="newSearchForm">
+    <div class="row" id="search-form">
+      <div class="col-md-12">
+        <form class="form-inline" id="new-search-form">
           <input name="query" type="text" placeholder="search" class="form-control input-md" required="">
           <input name="city" type="text" placeholder="city" class="form-control input-md" required="">
           <button id="searchButton" name="singlebutton" class="btn btn-primary">I'm Feeling Hungry</button>
         </form>
+      </div>
+    </div>
+    <div class="row" id="recent-searches">
+      <div class="col-md-12">
         <h3>Most Recently Searched For:</h3>
-         <div id='recentSearches'>
+        <div id='recent-search'>
           <script id='search-template' type='text/x-handlebars-template'>
             {{#each searches}}
-              <p>{{query}}</p>
+            <p>{{query}}</p>
             {{/each}}
           </script>
         </div>
