@@ -21,49 +21,43 @@
   </head>
 
   <body>
-    <p>Tell us what you think about the app!</p>
-    <form class="form-inline" id="create-review">
-      <div class="form-group">
-        <input type="text" name="title" class="form-control" placeholder="Title" autofocus>
-      </div>
-      <div class="form-group">
-        <input type="text" name="description" class="form-control" placeholder="Description">
-      </div>
-      <div class="form-group">
-        <input type="submit" class="btn btn-default" value="Add Review">
-      </div>
-    </form>
-
-    <!-- list of todos -->
-    <ul class="list-group" id="reviews-list">
-
-      <!-- handlebars template -->
-      <script id="reviews-template" type="text/x-handlebars-template">
-        {{#each reviews}}
-        <li class="list-group-item review" data-id="{{_id}}">
-
-          <!-- review title -->
-          <span class="label label-default">{{title}}</span>
-
-          <!-- review description -->
-          {{description}}
-
-          <div class="pull-right">
-            <!-- pencil icon to toggle update form -->
-            <a href="javascript:void(0)" data-toggle="collapse" data-target="#update-{{_id}}">
-              <span class="glyphicon glyphicon-pencil"></span>
-            </a>
-
-            <!-- trash can icon to delete review -->
-            <a href="javascript:void(0)" class="delete-review">
-              <span class="glyphicon glyphicon-trash"></span>
-            </a>
+    <div class="row">
+      <div class="col-md-5 col-md-offset-5">
+        <h3>Tell us what you think about the app!</h3>
+        <form class="form-horizontal" id="create-review">
+          <div class="form-group">
+            <input type="text" name="title" class="form-control" placeholder="Title" autofocus>
           </div>
+          <div class="form-group">
+            <textarea class="form-control" name="description" type="text" rows="3" placeholder="Description"></textarea>
+          </div>
+          <div class="form-group">
+            <input type="submit" class="btn btn-default" value="Add Review">
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- list of reviews -->
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <ul class="list-group" id="reviews-list">
+          <script id="reviews-template" type="text/x-handlebars-template">
+            {{#each reviews}}
+            <li class="list-group-item review" data-id="{{_id}}">
+              <div class="label label-default">{{title}}</div>
+              {{description}}
+              <div class="pull-right">
+                <a href="javascript:void(0)" class="delete-review">
+                  <span class="glyphicon glyphicon-trash"></span>
+                </a>
+              </div>
+            </li>
+            {{/each}}
+          </script>
+        </ul>
+      </div>
+    </div>
 
-        </li>
-        {{/each}}
-      </script>
-    </ul>
 
   </body>
 </html>
