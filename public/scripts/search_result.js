@@ -2,7 +2,7 @@ console.log('sanity check');
 
   var map;
 
-$(document).ready(function(){
+$(document).ready(function() {
 
   var source = $('#result-template').html();
   var resultTemplate = Handlebars.compile(source);
@@ -21,7 +21,8 @@ $(document).ready(function(){
     error: handleError
   });
 
-  $('#notFeelingItButton').on('click', function (event) {
+  $('#not-feeling-it-button').on('click', function (event) {
+    createMap();
     renderResult(outsideResults);
   });
 
@@ -30,7 +31,7 @@ $(document).ready(function(){
     renderResult(outsideResults);
   }
 
-  $('#backButton').on('click', function (event) {
+  $('#back-button').on('click', function (event) {
     window.location.href = '/';
   });
 
@@ -58,10 +59,10 @@ $(document).ready(function(){
   }
 
   function createMap() {
-  map = new google.maps.Map(document.getElementById('map'), {
-    center: { lat: 37.78, lng: -122.44},
-    zoom: 12
-  });
-}
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: { lat: 37.78, lng: -122.44},
+      zoom: 12
+    });
+  }
 
 });

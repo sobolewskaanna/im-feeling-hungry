@@ -23,20 +23,34 @@
   </head>
 
   <body>
-
-    <div>
-      <div id="results"></div>
-        <script id='result-template' type='text/x-handlebars-template'>
-          <h4 class='inline-header'>Restaurant:</h4>
-          <span class='venueResult'>{{venueName}}</span>
-          <h4 class='inline-header'>Location:</h4>
-          <span class='venueResult'>{{venueLocation.location}}</span>
-          <h4 class='inline-header'>Visit Restaurant:</h4>
-          <span class='venueResult'>{{venueWebsite}}</span>
-      </script>
-      <button id="backButton" name="singlebutton" class="btn btn-primary">Make Another Search</button>
-      <button id="notFeelingItButton" name="singlebutton" class="btn btn-primary">I'm Not Feeling It</button>
-    <div>
-    <div id="map" style="width:500px;height:380px"></div>
+    <section class="container">
+      <div class="row" id="question">
+        <div class="col-md-12">
+          <h2>How does this sound?</h2>
+          <hr>
+        </div>
+      </div>
+      <div>
+        <div class="row">
+          <div class="col-md-6" id="results">
+            <script id='result-template' type='text/x-handlebars-template'>
+              <h4 class='inline-header'>Restaurant:</h4>
+              <span class='venue-result'>{{venueName}}</span>
+              <h4 class='inline-header'>Location:</h4>
+              <span class='venue-result'>{{venueLocation.location}}</span>
+            </script>
+          </div>
+          <div class="col-md-6">
+            <div id="map" style="width:500px;height:380px"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12" id="buttons">
+          <button id="back-button" name="singlebutton" class="btn btn-primary">Make Another Search</button>
+          <button id="not-feeling-it-button" name="singlebutton" class="btn btn-primary">I'm Not Feeling It</button>
+        </div>
+      </div>
+    </section>
   </body>
 </html>

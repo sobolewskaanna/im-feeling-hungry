@@ -26,7 +26,7 @@ $(document).ready(function(){
       method: 'POST',
       url: '/api/searches',
       data: $(this).serialize(),
-      success: handleSucces,
+      success: handleSuccess,
       error: handleError
     });
   });
@@ -36,7 +36,7 @@ $(document).ready(function(){
   });
 });
 
-function handleSucces (json) {
+function handleSuccess (json) {
   var id = json._id;
   window.location.href = '/searches/' + id;
 }
