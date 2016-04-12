@@ -16,7 +16,7 @@ $(document).ready(function(){
       },
       error: handleError
     });
-    setTimeout(populateWithRecentSearches, 1000);
+    setTimeout(populateWithRecentSearches, 2500);
   }
   populateWithRecentSearches();
 
