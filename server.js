@@ -124,12 +124,6 @@ app.get('/api/searches', function (req, res) {
 });
 
 // get all reviews
-app.get('/api', function index(req, res) {
-  // send all todos as JSON response
-  res.json({ reviews: reviews });
-});
-
-// get all reviews
 app.get('/api/reviews', function index(req, res) {
   database.Review.find({}, function (err, reviews) {
     if (err) {
@@ -157,10 +151,31 @@ app.post('/api/reviews', function (req, res) {
 
 //delete a review
 app.delete('/api/reviews/:id', function (req, res) {
-  database.Review.findOneAndRemove({_id: req.params.id} ,function (err, foundReview) {
-    console.log(foundReview);
-    res.json(foundReview);
+  database.Review.findOneAndRemove(req.params.id, function (err, foundReview) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.json(foundReview);
+    }
+  });
+});
 
+//update a review
+app.put('/api/reviews/:id', function (req, res) {
+  database.Review.findById(req.params.id, function (err, foundReview) {
+    if (err) {
+      res.send(err);
+    } else {
+      foundReview.title = req.body.title;
+      foundReview.description = req.body.description;
+      foundReview.save(function (err, savedReview) {
+        if (err) {
+          res.send(err);
+        } else {
+          res.json(savedReview);
+        }
+      });
+    }
   });
 });
 

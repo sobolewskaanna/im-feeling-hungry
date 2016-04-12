@@ -11,16 +11,6 @@ $(document).ready(function(){
   //GET all reviews on page load
   $.ajax({
     method: 'GET',
-    url: 'api',
-    success: function onIndexSuccess(data) {
-      allReviews = data.reviews;
-      renderReview();
-    },
-    error: onError
-  });
-
-  $.ajax({
-    method: 'GET',
     url: 'api/reviews',
     success: function onIndexSuccess(reviews) {
       allReviews = reviews;
@@ -29,6 +19,7 @@ $(document).ready(function(){
     error: onError
   });
 
+  //render reviews to page
   var renderReview = function () {
     $('#reviews-list').empty();
     var reviewsHtml = template({ reviews: allReviews });
@@ -74,27 +65,28 @@ $(document).ready(function(){
   });
 
   // //update a review
-  // $('#reviews-list').on('submit','.update-review', function (event) {
-  //   //find id of the clicked element
-  //   var reviewId = $(this).closest('.review').attr('data-id');
-  //   //find and store the review to delete from the array by id
-  //   var reviewToUpdate = allReviews.filter(function (review) {
-  //     return review._id === reviewId;
-  //   })[0];
-  //
-  //   event.preventDefault();
-  //   $.ajax({
-  //     method: 'PUT',
-  //     url: 'api/reviews/:id',
-  //     data: reviewId,
-  //     success: function onUpdateSuccess (response) {
-  //         var result = allReviews.splice(allReviews.indexOf(reviewToDelete), 1, response);
-  //         console.log(result);
-  //         renderReview();
-  //     },
-  //     error: onError
-  //   });
-  // });
+  $('#reviews-list').on('submit','.update-review', function (event) {
+    //find id of the clicked element
+    var reviewId = $(this).closest('.review').attr('data-id');
+    //find and store the review to delete from the array by id
+    var reviewToUpdate = allReviews.filter(function (review) {
+      return review._id === reviewId;
+    })[0];
+
+    event.preventDefault();
+    $.ajax({
+      method: 'PUT',
+      url: 'api/reviews/' + reviewId,
+      data: $(this).serialize(),
+      success: function onUpdateSuccess (response) {
+          var result = allReviews.splice(allReviews.indexOf(reviewToUpdate), 1, response);
+          console.log(result);
+          renderReview();
+      },
+      error: onError
+    });
+  });
+
 });
 
 function onError (error) {
