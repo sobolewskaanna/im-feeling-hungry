@@ -15,17 +15,18 @@ $(document).ready(function(){
     success: function onIndexSuccess(data) {
       allReviews = data.reviews;
       renderReview();
-    }
+    },
+    error: onError
   });
 
   $.ajax({
     method: 'GET',
     url: 'api/reviews',
     success: function onIndexSuccess(reviews) {
-      console.log(reviews);
       allReviews = reviews;
       renderReview();
-    }
+    },
+    error: onError
   });
 
   var renderReview = function () {
@@ -45,8 +46,36 @@ $(document).ready(function(){
         console.log(response);
         allReviews.push(response);
         renderReview();
-      }
+      },
+      error: onError
+    });
+  });
+
+  //delete a review
+  $('#reviews-list').on('click','.delete-review', function (event) {
+    //find id of the clicked element
+    var reviewId = $(this).closest('.review').attr('data-id');
+    //find and store the review to delete from the array by id
+    var reviewToDelete = allReviews.filter(function (review) {
+      return review._id === reviewId;
+    })[0];
+
+    event.preventDefault();
+    $.ajax({
+      method: 'DELETE',
+      url: 'api/reviews/:id',
+      data: reviewId,
+      success: function onDeleteSuccess (response) {
+          var result = allReviews.splice(allReviews.indexOf(reviewToDelete), 1);
+          console.log(result);
+          renderReview();
+      },
+      error: onError
     });
   });
 
 });
+
+function onError (error) {
+  console.log('error from reviews', error);
+}
