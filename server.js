@@ -157,8 +157,10 @@ app.post('/api/reviews', function (req, res) {
 
 //delete a review
 app.delete('/api/reviews/:id', function (req, res) {
-  database.Review.findOneAndRemove({ _id: req.params.reviewId }, function (err, foundReview) {
+  database.Review.findOneAndRemove({_id: req.params.id} ,function (err, foundReview) {
+    console.log(foundReview);
     res.json(foundReview);
+
   });
 });
 

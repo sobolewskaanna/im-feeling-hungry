@@ -43,7 +43,6 @@ $(document).ready(function(){
       url: 'api/reviews',
       data: $(this).serialize(),
       success: function onCreateSuccess (response) {
-        console.log(response);
         allReviews.push(response);
         renderReview();
       },
@@ -63,17 +62,39 @@ $(document).ready(function(){
     event.preventDefault();
     $.ajax({
       method: 'DELETE',
-      url: 'api/reviews/:id',
+      url: 'api/reviews/' + reviewId,
       data: reviewId,
       success: function onDeleteSuccess (response) {
-          var result = allReviews.splice(allReviews.indexOf(reviewToDelete), 1);
-          console.log(result);
+        var toDelete = allReviews.indexOf(reviewToDelete);
+          allReviews.splice((allReviews.indexOf(reviewToDelete)), 1);
           renderReview();
       },
       error: onError
     });
   });
 
+  // //update a review
+  // $('#reviews-list').on('submit','.update-review', function (event) {
+  //   //find id of the clicked element
+  //   var reviewId = $(this).closest('.review').attr('data-id');
+  //   //find and store the review to delete from the array by id
+  //   var reviewToUpdate = allReviews.filter(function (review) {
+  //     return review._id === reviewId;
+  //   })[0];
+  //
+  //   event.preventDefault();
+  //   $.ajax({
+  //     method: 'PUT',
+  //     url: 'api/reviews/:id',
+  //     data: reviewId,
+  //     success: function onUpdateSuccess (response) {
+  //         var result = allReviews.splice(allReviews.indexOf(reviewToDelete), 1, response);
+  //         console.log(result);
+  //         renderReview();
+  //     },
+  //     error: onError
+  //   });
+  // });
 });
 
 function onError (error) {
