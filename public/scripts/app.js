@@ -32,7 +32,7 @@ $(document).ready(function(){
   });
 
   $('#menu').on('click', function (event) {
-    window.location.href = '/discussions';
+    window.location.href = '/reviews';
   });
 });
 

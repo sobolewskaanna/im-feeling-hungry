@@ -86,7 +86,6 @@ $(document).ready(function(){
       error: onError
     });
   });
-
 });
 
 function onError (error) {
