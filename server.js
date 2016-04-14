@@ -2,7 +2,9 @@
 var express = require('express');
 
 // require and load dotenv
-var dotenv = require('dotenv').load();
+if (process.env.NODE_ENV !== 'production') {
+  var dotenv = require('dotenv').load();
+}
 
 //generate a new express app and call it 'app'
 var app = express();
