@@ -1,6 +1,8 @@
 console.log('sanity check');
 
   var map;
+  var lat;
+  var lng;
 
 $(document).ready(function() {
 
@@ -12,7 +14,6 @@ $(document).ready(function() {
   var url = '/api/searches/' + id + '/results';
   var outsideResults;
 
-  createMap();
 
   $.ajax({
     method: 'GET',
@@ -22,7 +23,7 @@ $(document).ready(function() {
   });
 
   $('#not-feeling-it-button').on('click', function (event) {
-    createMap();
+    createMap(lat, lng);
     renderResult(outsideResults);
   });
 
@@ -43,8 +44,9 @@ $(document).ready(function() {
       var resultsAmount = results.result.length;
       var randomNumber = Math.floor((Math.random() * resultsAmount) + 0);
       var result = results.result[randomNumber];
-      var lat = results.result[randomNumber].venueLocation.lat;
-      var lng = results.result[randomNumber].venueLocation.lng;
+      lat = results.result[randomNumber].venueLocation.lat;
+      lng = results.result[randomNumber].venueLocation.lng;
+      createMap(lat, lng);
       new google.maps.Marker({
         position: new google.maps.LatLng(lat, lng),
         map: map,
@@ -58,9 +60,9 @@ $(document).ready(function() {
     console.log ('there is an error', err);
   }
 
-  function createMap() {
+  function createMap(lat, lng) {
     map = new google.maps.Map(document.getElementById('map'), {
-      center: { lat: 37.78, lng: -122.44},
+      center: { lat: lat, lng: lng },
       zoom: 12
     });
   }
